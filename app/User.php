@@ -26,4 +26,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function booking()
+    {
+        return $this->hasMany(Booking::class);
+    }
+    public function event()
+    {
+        return $this->hasMany(Event::class);
+    }
+
+    public function addEvent()
+    {
+
+    }
 }
