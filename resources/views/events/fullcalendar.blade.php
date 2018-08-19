@@ -1,7 +1,6 @@
 @extends('layouts.layout')
 
 @section('style')
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
 @endsection
 
@@ -10,11 +9,17 @@ Calendar
 @endsection
 
 @section('content')
+
+<!-- If is Admin -->
+<div class="mr-auto">
+<a class="btn" href="/events/create">Add Event</a>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Full Calendar Example</div>
+                <div class="panel-heading">Events Calendar </div>
 
                 <div class="panel-body">
                     {!! $calendar->calendar() !!}
@@ -22,6 +27,15 @@ Calendar
             </div>
         </div>
     </div>
+</div>
+
+
+<div class="container">
+@foreach ($data as $event)
+
+    @include ('events.event_detail')
+
+@endforeach
 </div>
 @endsection
 

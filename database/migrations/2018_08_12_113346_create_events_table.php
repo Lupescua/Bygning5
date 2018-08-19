@@ -22,7 +22,7 @@ class CreateEventsTable extends Migration
             // the dates contain the start date and start hour, and end date and end hour
             $table->dateTime('start_date');
             $table->dateTime('end_date');  
-            $table->string('main_pic_name')->default('new pic'); ; 
+            $table->string('image'); 
             $table->string('link'); 
             $table->timestamps();
         });

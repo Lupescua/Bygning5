@@ -11,13 +11,14 @@ use Calendar;
 use Validator;
 use Auth;
 use Session;
+use Illuminate\Support\Facades\Input as Input;
 
 class EventsController extends Controller
 {
     public function index() 
     {
         // $events = Event::all();
-        $events = [];
+       
         $data = Event::all();
         if($data->count()) {
             foreach ($data as $key => $value) {
@@ -36,7 +37,10 @@ class EventsController extends Controller
             }
         }
         $calendar = Calendar::addEvents($events);
-        return view('events.fullcalendar', compact('calendar'));
+
+        // $events = $data;
+
+        return view('events.fullcalendar', compact('calendar','data'));
         // return view('events.index',compact('events'));
     }
     
@@ -62,22 +66,56 @@ class EventsController extends Controller
             return Redirect::to('/events/create')->withInput()->withErrors($validator);
         }
 
-        Event::create([
-            'name' => request('name'),
-            'user_id' => '1',
-            // 'user_id' => $user->id,
-            'description' => request('description'),
-            'adress' => request('adress'),
-            'start_date' => request('start_date'),
-            // 'start_date' => strtotime(request('start_date').request('start_time')),
-            'end_date' => request('end_date'),
-            'main_pic_name' => request('main_pic_name'),
-            'link' => request('link')
-        ]);
-          
+        $event = new Event();
+        $event->name = request('name');      
+        $event->user_id = Auth::user()->id;
+        // 'user_id' => $user->id,
+        $event->description = request('description');
+        $event->adress = request('adress');    
+        $event->start_date = request('start_date');
+        // 'start_date' => strtotime(request('start_date').request('start_time')),
+        $event->end_date = request('end_date');
+        $event->link = request('link');            
+
+        if($request->hasFile('image')){
+    		$image = $request->file('image');
+    		$filename = $image->getClientOriginalName();
+    		Image::make($image)->resize(300, 300)->save( public_path('/img/events/' . $filename ) );
+    		$event->image = $filename;
+    	}
+        $event->save();
+
         \Session::flash('succes','A new Event has been added');
 
         //redirect to show_all page
         return redirect(action('EventsController@index'));
+    }
+
+    public function update(Request $request, $id)
+    {
+
+        $event = Event::find($id)->get();
+        $event->name = $request['name'];      
+        $event->user_id = Auth::user()->id;
+        // 'user_id' => $user->id,
+        $event->description = $request['description'];
+        $event->adress = $request['adress'];    
+        $event->start_date = $request ['start_date'];
+        // 'start_date' => strtotime(request('start_date').request('start_time')),
+        $event->end_date = $request ['end_date'];
+        $event->link = $request ['link'];            
+        if(Input::hasFile('image')){
+            $file = Input::file('image');
+            $event->image = $file->getClientOriginalName();
+            $file->move('img\events', $file->getClientOriginalName());
+        }
+        $event->save();
+       
+        return view('events.show',compact('event'));
+    }
+    
+    public function destroy()
+    {
+
     }
 }

@@ -1,11 +1,6 @@
-@extends('layouts.layout')
-@section('title')
-Add a new Room
-@endsection
-
-@section('content')
-<form method="post" action="/rooms">
-<!-- {{ action('RoomsController@create') }} -->
+@extends('layouts.layout') @section('title') Add a new Room @endsection @section('content')
+<form method="post" action="/rooms" enctype="multipart/form-data">
+    <!-- {{ action('RoomsController@create') }} -->
     {{csrf_field()}}
     <div class="form-row">
         <div class="col-md-8 mb-3">
@@ -22,20 +17,33 @@ Add a new Room
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                <label for="floor_nr">Floor Number</label>
-                <input name="floor_nr" type="text"  class="form-control" id="floor_nr" placeholder="Floor Number">
+                <label for="adress">Building Adress</label>
+                <input name="adress" type="text" class="form-control" id="adress" placeholder="Nicolai Bygning 5">
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                <label>Select profile image:</label>
-                <input type="file" name="main_pic_id" id="file" >
+                <label for="floor_nr">Floor Number</label>
+                <input name="floor_nr" type="text" class="form-control" id="floor_nr" placeholder="Floor Number">
+            </div>
+        </div>
+        <div class="col-md-8 mb-3">
+            <div class="form-group row">
+                <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Upload Room Image') }}</label>
+                <div class="col-md-6">
+                    <input id="image" type="file" name="image" value="{{ old('image') }}" required>
+                    @if ($errors->has('image'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('image') }}</strong>
+                    </span>
+                    @endif
+                </div>
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
                 <div class='input-group date' id='bookable_room'>
-                    <input name="bookable" type='checkbox'  id="bookable" />
+                    <input name="bookable" type='checkbox' id="bookable" />
                     <label for="bookable">Admin only - Bookable</label>
                 </div>
             </div>

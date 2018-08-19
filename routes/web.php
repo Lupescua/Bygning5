@@ -15,14 +15,14 @@ use App\Http\Controllers\RoomsController;
 */
 
 //I'm using this as main page to test code
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('home.index');
 });
 
 // goes to the main page
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // goes to the Booking page
 Route::get('/rooms', 'RoomsController@index');
@@ -51,3 +51,12 @@ Route::post('/events', 'EventsController@store');
 
 // goes to each event in part
 Route::get('/events/{event}','EventsController@show');
+
+// Route::post('/events/{event}','EventsController@update');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/profile/{user}','UserController@show');
+Route::post('/profile/{user}', 'UserController@update');

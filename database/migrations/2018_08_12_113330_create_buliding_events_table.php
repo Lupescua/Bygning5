@@ -20,7 +20,7 @@ class CreateBulidingEventsTable extends Migration
             $table->text('description');
             $table->string('booking_date');
             $table->string('booking_hour');
-            $table->string('main_pic_name')->default('new pic'); ; 
+            $table->string('image'); ; 
             $table->string('link'); 
             $table->timestamps();
         });

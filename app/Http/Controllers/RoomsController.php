@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Room;
+use Illuminate\Support\Facades\Input as Input;
 
 class RoomsController extends Controller
 {
@@ -33,45 +34,31 @@ class RoomsController extends Controller
         $this->validate(request(),['name'=>'required']);
     
         $room = new Room();
-        $room->name =request('name');
-        $room->description =request('description');
-        $room->floor_nr =request('floor_nr');
-        // $room->main_pic_id =request('main_pic_id');
+        $room->name = request('name');
+        $room->description = request('description');
+        $room->floor_nr = request('floor_nr');
+        $room->adress = request('adress');
         if (request('bookable') == 'on'){
         $room->bookable = 1;
         }else{
         $room->bookable = 0;
+        }                
+        // $room->image = request('image');
+        if(Input::hasFile('image')){
+            $file = Input::file('image');
+            $room->image = $file->getClientOriginalName();
+            $file->move('img\rooms', $file->getClientOriginalName());
         }
-
         $room->save();
 
         //redirect to show_all page
         return redirect(action('RoomsController@index'));
-
-        // Room::create(['name', 'description', 'floor_nr', 'main_pic_id', 'bookable', 'pictures'
-        // ]);
-
-        // $this->validate(request(),[
-        //     'name'=>'required',
-        //     'description'=>'required',
-        //     'responsible'=>'required',
-        //     'deadline'=>'required',
-        // ]);
-        // auth()->user()->publish(
-        //     new Task(request(['name','description','responsible','deadline']))
-        // );
-
-        // sessions()->flash('message','Your task has been created');
-        
-        // I moved the create in the Model
-        // Task::create([
-        //     'name' => request('name'),
-        //     'description' => request('description'),
-        //     'responsible' => request('responsible'),
-        //     'deadline' => request('deadline'),
-        //     'user_id' => auth()->id()
-        //     ]);
+       
     }
 
+    public function destroy()
+    {
+
+    }
     
 }

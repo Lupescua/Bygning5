@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     protected $fillable = [
-        'name', 'description', 'floor_nr', 'main_pic_id', 'bookable'
+        'name', 'description', 'floor_nr', 'image', 'adress', 'bookable'
     ];
     
     public function isBookable()

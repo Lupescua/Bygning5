@@ -1,6 +1,6 @@
 @extends('layouts.layout') @section('title') Add a new Event @endsection @section('content')
 
-<form method="post" action="/events">
+<form method="post" action="/events" enctype="multipart/form-data">
     <!-- {{ action('RoomsController@create') }} -->
     {{csrf_field()}}
     <div class="form-row">
@@ -49,9 +49,16 @@
             </div>
         </div>
         <div class="col-md-8 mb-3">
-            <div class="form-group">
-                <label>Select profile image:</label>
-                <input type="file" name="main_pic_name" id="file">
+            <div class="form-group row">
+                <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Upload Event Image') }}</label>
+                <div class="col-md-6">
+                    <input id="image" type="file" name="image" value="{{ old('image') }}" required>
+                    @if ($errors->has('image'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('image') }}</strong>
+                    </span>
+                    @endif
+                </div>
             </div>
         </div>
         <div class="col-md-8 mb-3">

@@ -17,9 +17,9 @@ class CreateRoomsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description');
-            $table->string('adress')->default('Nicolai building');
+            $table->string('adress');
             $table->string('floor_nr');
-            $table->string('main_pic_name')->default('no pic'); 
+            $table->string('image'); 
             // bookable No = 0 Some rooms might be given for long term, meaning they are not Bookable. 
             // bookable Yes = 1. They are bookable
             $table->boolean('bookable')->default('1');

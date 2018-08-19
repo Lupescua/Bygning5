@@ -4,5 +4,9 @@ Show blade
 @endsection
 
 @section('content')
-<h1>Show blade {{$event->id}}</h1>
+<div class="container">
+
+@include ('events.event_detail')
+
+</div>
 @endsection
