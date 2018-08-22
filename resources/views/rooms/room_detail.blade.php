@@ -16,19 +16,17 @@
             Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
         </p>
         <div>
-            @if ($room->bookable === 1)
-            <button class="order-md-1"> Book </button>
-            <button class="order-md-2"> Update </button>
-            <button class="order-md-3"> Delete </button>
+            <a class="btn order-md-1" href="/rooms/{{$room->id}}/book"> Book </a>
+            @if (Auth::user()->admin === 1)
+            <a class="btn order-md-2" href="/rooms/{{$room->id}}/update"> Update </a>
+            <a class="btn order-md-3" href="/rooms/{{$room->id}}/delete"> Delete </a>
             @endif
         </div>
-</div>
-        <div class="col-md-5 order-md-1">
-            @if(count($room->image) > 0)
-            <img class="featurette-image img-fluid mx-auto" src="/img/rooms/{{$room->image}}" data-src="holder.js/500x500/auto" alt="Generic placeholder image"> 
-            @else
-            <img class="featurette-image img-fluid mx-auto" src="http://designsontap.co/wp-content/uploads/2018/07/teenage-guy-bedroom-ideas-beautiful-best-cool-room-decorating-ideas-for-guys-e280a2-the-ignite-show-of-teenage-guy-bedroom-ideas.jpg"
-                data-src="holder.js/500x500/auto" alt="Generic placeholder image"> 
-                @endif
-        </div>
     </div>
+    <div class="col-md-5 order-md-1">
+        @if(count($room->image) > 0)
+        <img class="featurette-image img-fluid mx-auto" src="/img/rooms/{{$room->image}}" data-src="holder.js/500x500/auto" alt="Generic placeholder image"> @else
+        <img class="featurette-image img-fluid mx-auto" src="http://designsontap.co/wp-content/uploads/2018/07/teenage-guy-bedroom-ideas-beautiful-best-cool-room-decorating-ideas-for-guys-e280a2-the-ignite-show-of-teenage-guy-bedroom-ideas.jpg"
+            data-src="holder.js/500x500/auto" alt="Generic placeholder image"> @endif
+    </div>
+</div>

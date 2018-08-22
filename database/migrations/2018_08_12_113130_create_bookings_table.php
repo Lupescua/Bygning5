@@ -15,9 +15,12 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->text('description');
             $table->integer('user_id');
             $table->integer('room_id');
-            // the dates contain the start date and start hour, and end date and end hour
+            $table->string('image'); ; 
+            $table->string('link'); 
             $table->dateTime('start_date');
             $table->dateTime('end_date');  
             $table->timestamps();

@@ -31,9 +31,6 @@
         <!-- /.container -->
 
 
-        <!-- FOOTER -->
-        @include ('layouts.footer')
-
     </main>
     
 @endsection

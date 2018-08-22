@@ -13,33 +13,56 @@ use App\Http\Controllers\RoomsController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/home', 'HomeController@index')->name('home');
 
 //I'm using this as main page to test code
 Route::get('/', function () {
     return view('home.index');
 });
 
-// goes to the main page
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Auth::routes();
+// ====================
+// USER
+// show user profile
+Route::get('/profile/{user}','UserController@show');
 
-// goes to the Booking page
-Route::get('/rooms', 'RoomsController@index');
+// update user profile
+Route::post('/profile/{user}', 'UserController@update');
 
-// Adds a new room to the DB
-Route::get('/rooms/create', 'RoomsController@create'); 
+// ====================
+//  ROOMS
+
+// goes to the Rooms page
+Route::get('/rooms', 'RoomsController@index')->name('rooms');
 
 // goes to the save new room page
 Route::post('/rooms', 'RoomsController@store');
 
+// Adds a new room to the DB
+Route::get('/rooms/create', 'RoomsController@create'); 
+
 // goes to each room in part
 Route::get('/rooms/{room}', 'RoomsController@show'); 
 
-// goes to each room in part
-// Route::get('/rooms/{room}/edit', 'RoomsController@edit'); 
-// when I edit, my post will submit a Patch request  Route::patch('/rooms/{room}', 'RoomsController@?'); 
+// I created a new method for the admin to update since only an admin can update a room
+Route::get('/rooms/{room}/update', 'RoomsController@admin_show');
 
+// goes to update room 
+Route::post('/rooms/{room}/update', 'RoomsController@update');
+// ***
+// goes to delete room 
+Route::get('/rooms/{room}/delete', 'RoomsController@destroy');         
+
+// ====================
+// BOOKING
+// ***
+// goes to book room 
+Route::get('/rooms/{room}/book', 'BookingController@index')->name('room.book'); 
+// goes to book room 
+Route::post('/rooms/{room}/book', 'BookingController@create')->name('room.create'); ; 
+ 
+// ====================
+// EVENTS
 // goes to the Events page
 Route::get('/events', 'EventsController@index');
 
@@ -54,9 +77,4 @@ Route::get('/events/{event}','EventsController@show');
 
 // Route::post('/events/{event}','EventsController@update');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/profile/{user}','UserController@show');
-Route::post('/profile/{user}', 'UserController@update');

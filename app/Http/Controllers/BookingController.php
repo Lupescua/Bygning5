@@ -3,28 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Room;
 use App\User;
-use Image;
+use App\Booking;
+use Illuminate\Support\Facades\Input;
 use Auth;
-use App\Event;
+use Carbon\Carbon;
 
-class UserController extends Controller
+class BookingController extends Controller
 {
-    // does not allow someone to access the UserController if the are not logged in
     public function __construct()
     {
-        $this->middleware('auth');
-        // $this->middleware('auth',['only'=>'index']);
+        $this->middleware('auth')->except('index','show');
     }
-
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Room $room)
     {
-        //
+        return view('bookings.create',compact('room'));
     }
 
     /**
@@ -32,9 +32,28 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(Room $room)
+    {     
+        
+        $this->validate(request(),['name'=>'required','description'=>'required','startDate'=>'required','endDate'=>'required']);
+        
+        $book = new Booking();
+        $book->name = request('name');
+        $book->description = request('description');
+        $book->user_id = auth()->id();
+        $book->room_id = $room->id;
+        $book->start_date = Carbon::parse(request('startDate'));         
+        $book->end_date = Carbon::parse(request('endDate'));
+        $book->link = request('link'); 
+        if(Input::hasFile('image')){
+            $file = Input::file('image');
+            $book->image = $file->getClientOriginalName();
+            $file->move('img\books', $file->getClientOriginalName());
+        }
+        $book->save();
+
+        //redirect to show_all page
+        return redirect()->route('rooms');
     }
 
     /**
@@ -54,11 +73,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        
-        $events = Event::where('user_id', $user->id)->get();
-        return view('users.profile',compact('user','events'));
+        //
     }
 
     /**
@@ -79,24 +96,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {   
-        $user = Auth::user();     
-        // Handle the user upload of avatar
-    	if($request->hasFile('image')){
-    		$image = $request->file('image');
-    		$filename = $image->getClientOriginalName();
-    		Image::make($image)->resize(300, 300)->save( public_path('/img/user/' . $filename ) );            
-    		$user->image = $filename;
-        }
-        $user->name =  $request['name']; 
-        $user->email =  $request['email']; 
-        $user->save();
-        
-        $events = Event::where('user_id', $user->id)->get();
-        return view('users.profile',compact('user','events'));
-    
-        
+    public function update(Request $request, $id)
+    {
+        //
     }
 
     /**

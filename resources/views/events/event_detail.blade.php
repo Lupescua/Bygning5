@@ -12,7 +12,7 @@
         @elseif ($event->bookable === 1)
         <p class="lead"> The event is currently bookable </p>
         @endif              
-        <p class="lead"> {{$event->name}} Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper.
+        <p class="lead"> {{$event->user->name}} made {{$event->name}} Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper.
             Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
             commodo.
         </p>

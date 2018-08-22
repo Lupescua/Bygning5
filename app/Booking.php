@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
 {
+    protected $fillable = [
+        'name', 'description', 'user_id', 'room_id', 'start_date', 'end_date','image', 'link'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -14,8 +18,5 @@ class Booking extends Model
     {
         return $this->belongsTo(Room::class);
     }
-        public function buildingEvent()
-    {
-        return $this->belongsTo(BuildingEvent::class);
-    }
+
 }

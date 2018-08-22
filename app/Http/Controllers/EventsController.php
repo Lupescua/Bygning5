@@ -11,10 +11,16 @@ use Calendar;
 use Validator;
 use Auth;
 use Session;
+use Image;
 use Illuminate\Support\Facades\Input as Input;
 
 class EventsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index','show');
+    }
+    
     public function index() 
     {
         // $events = Event::all();
@@ -56,7 +62,7 @@ class EventsController extends Controller
 
     }
 
-    public function store(User $user)
+    public function store( User $user)
     {
         $request = request()->all();
         $validator = Validator::make($request,['name'=>'required']);
@@ -68,8 +74,7 @@ class EventsController extends Controller
 
         $event = new Event();
         $event->name = request('name');      
-        $event->user_id = Auth::user()->id;
-        // 'user_id' => $user->id,
+        $event->user_id = auth()->id();
         $event->description = request('description');
         $event->adress = request('adress');    
         $event->start_date = request('start_date');
@@ -77,12 +82,13 @@ class EventsController extends Controller
         $event->end_date = request('end_date');
         $event->link = request('link');            
 
-        if($request->hasFile('image')){
-    		$image = $request->file('image');
+        if(Input::hasFile('image')){
+    		$image = Input::file('image');
     		$filename = $image->getClientOriginalName();
     		Image::make($image)->resize(300, 300)->save( public_path('/img/events/' . $filename ) );
     		$event->image = $filename;
-    	}
+        }
+
         $event->save();
 
         \Session::flash('succes','A new Event has been added');
@@ -113,7 +119,7 @@ class EventsController extends Controller
        
         return view('events.show',compact('event'));
     }
-    
+
     public function destroy()
     {
 

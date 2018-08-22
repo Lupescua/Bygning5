@@ -7,9 +7,8 @@ All Events
 <div class="container">
 
 @foreach ($events as $event)
-@include (events.event_detail)
-
-
+@include ('events.event_detail')
 @endforeach
+
 </div>
 @endsection
