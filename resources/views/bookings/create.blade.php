@@ -1,6 +1,6 @@
 @extends('layouts.layout') @section('title') Book this room @endsection @section('content')
 
-<form method="post" action="{{ action('BookingController@create',compact('room')) }}" enctype="multipart/form-data">
+<form method="post" action="" enctype="multipart/form-data">
     {{csrf_field()}}
   <input type="hidden" id="room_id" name="room_id" value="$room->id">
     <div class="form-row">
@@ -27,7 +27,6 @@
                 {!! Form::label('startDate','Start Date:') !!}
                 <div>
                     <input name="startDate" type="dateTime-local" class="form-control" id="startDate" value="20{{Carbon\Carbon::now()->format('y-m-d\TH:i')}}">
-                    <!-- {{ Form::input('dateTime-local', 'startDate', Carbon\Carbon::now()->format('M-d-y\TH:i'), array('class' => 'form-control')) }} -->
                     {!! $errors->first('startDate','
                     <p class="alert alert-danger">:message</p>') !!}
                 </div>
@@ -38,9 +37,7 @@
                 {!! Form::label('endDate','End Date:') !!}
                 <div>
                     <input name="endDate" type="dateTime-local" class="form-control" id="endDate" value="20{{Carbon\Carbon::now()->format('y-m-d\TH:i')}}">
-                    <!-- {{ Form::input('dateTime-local', 'endDate', Carbon\Carbon::now()->format('y-m-d\TH:i'), array('class' => 'form-control')) }} -->
-                    {!! $errors->first('end_date','
-                    <p class="alert alert-danger">:message</p>') !!}
+                    {!! $errors->first('end_date','<p class="alert alert-danger">:message</p>') !!}
                 </div>
             </div>
         </div>

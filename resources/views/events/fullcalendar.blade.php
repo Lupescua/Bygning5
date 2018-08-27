@@ -10,10 +10,12 @@ Calendar
 
 @section('content')
 
-<!-- If is Admin -->
-<div class="mr-auto">
-<a class="btn" href="/events/create">Add Event</a>
-</div>
+
+@if (Auth::check())
+    <div class="mr-auto">
+      <a class="btn" href="/events/create">Add Event</a>
+    </div>
+@endif
 
 <div class="container">
     <div class="row">

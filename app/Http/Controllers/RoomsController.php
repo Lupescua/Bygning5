@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Room;
 use Illuminate\Support\Facades\Input as Input;
+use App\Booking;
+use Calendar;
 
 class RoomsController extends Controller
 {
@@ -15,15 +17,53 @@ class RoomsController extends Controller
 
     public function index() 
     {
-        // $rooms = Room::all();
+        $booking = Booking::all();
+        if($booking->count()) {
+            foreach ($booking as $key => $value) {
+                $events[] = Calendar::event(
+                    $value->name,
+                    true,
+                    new \DateTime($value->start_date),
+                    new \DateTime($value->end_date.' +1 day'),
+                    null,
+                    // Add color and link on event
+	                [
+	                    'color' => '#f05050',
+	                    'url' => '/bookings/"$booking->id"',
+	                ]
+                );
+            }
+        }
+        $calendar = Calendar::addEvents($events);
+
         $rooms = Room::orderby('name','asc')->get();
-        // dd($rooms);
-        return view('rooms.index',compact('rooms'));
+   
+        return view('rooms.index',compact('calendar','rooms'));
     }
     
     public function show(Room $room) 
     {
-        return view('rooms.show',compact('room'));
+        
+        $bookings = Booking::where('room_id', $room->id)->get();
+        if($bookings->count()) {
+            foreach ($bookings as $key => $value) {
+                $events[] = Calendar::event(
+                    $value->name,
+                    true,
+                    new \DateTime($value->start_date),
+                    new \DateTime($value->end_date.' +1 day'),
+                    null,
+                    // Add color and link on event
+	                [
+	                    'color' => '#f05050',
+                        'url' => '#'.$value->id,
+                        
+	                ]
+                );
+            }
+        }
+        $calendar = Calendar::addEvents($events);
+        return view('rooms.show',compact('room','bookings','calendar'));
     }
     
     public function create()

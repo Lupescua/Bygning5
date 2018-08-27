@@ -22,9 +22,7 @@ class EventsController extends Controller
     }
     
     public function index() 
-    {
-        // $events = Event::all();
-       
+    {       
         $data = Event::all();
         if($data->count()) {
             foreach ($data as $key => $value) {
@@ -43,8 +41,6 @@ class EventsController extends Controller
             }
         }
         $calendar = Calendar::addEvents($events);
-
-        // $events = $data;
 
         return view('events.fullcalendar', compact('calendar','data'));
         // return view('events.index',compact('events'));

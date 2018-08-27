@@ -23,7 +23,7 @@ class BookingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Room $room)
-    {
+    {            
         return view('bookings.create',compact('room'));
     }
 
@@ -32,7 +32,7 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Room $room)
+    public function create()
     {     
         
         $this->validate(request(),['name'=>'required','description'=>'required','startDate'=>'required','endDate'=>'required']);
@@ -73,9 +73,9 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Booking $booking) 
     {
-        //
+        return view('bookings.show',compact('bookings'));
     }
 
     /**

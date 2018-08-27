@@ -16,10 +16,12 @@
             Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
         </p>
         <div>
-            <a class="btn order-md-1" href="/rooms/{{$room->id}}/book"> Book </a>
-            @if (Auth::user()->admin === 1)
-            <a class="btn order-md-2" href="/rooms/{{$room->id}}/update"> Update </a>
-            <a class="btn order-md-3" href="/rooms/{{$room->id}}/delete"> Delete </a>
+            @if (Auth::check())
+            <a class="btn order-md-1" href="/rooms/{{$room->id}}/book"> Book </a>         
+                @if (Auth::user()->admin === 1)
+                    <a class="btn order-md-2" href="/rooms/{{$room->id}}/update"> Update </a>
+                    <a class="btn order-md-3" href="/rooms/{{$room->id}}/delete"> Delete </a>
+                @endif
             @endif
         </div>
     </div>

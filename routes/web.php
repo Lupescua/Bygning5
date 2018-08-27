@@ -59,7 +59,10 @@ Route::get('/rooms/{room}/delete', 'RoomsController@destroy');
 // goes to book room 
 Route::get('/rooms/{room}/book', 'BookingController@index')->name('room.book'); 
 // goes to book room 
-Route::post('/rooms/{room}/book', 'BookingController@create')->name('room.create'); ; 
+Route::post('/rooms/{room}/book', 'BookingController@create')->name('room.create'); 
+
+// goes to each booking in part
+Route::get('/bookings/{booking}','BookingController@show');
  
 // ====================
 // EVENTS

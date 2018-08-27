@@ -16,8 +16,10 @@
             Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus
             commodo.
         </p>
-        @if ($event->bookable === 1)
-        <button> Book </button>
+        @if (Auth::check())
+            @if ($event->bookable === 1)
+                <button> Book </button>
+            @endif 
         @endif 
     </div>
     <div class="col-md-5 order-md-1">     
