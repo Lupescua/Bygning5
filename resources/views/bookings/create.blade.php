@@ -1,6 +1,6 @@
 @extends('layouts.layout') @section('title') Book this room @endsection @section('content')
 
-<form method="post" action="" enctype="multipart/form-data">
+<form method="post" action="/rooms/{{$room->id}}/book" enctype="multipart/form-data">
     {{csrf_field()}}
   <input type="hidden" id="room_id" name="room_id" value="$room->id">
     <div class="form-row">

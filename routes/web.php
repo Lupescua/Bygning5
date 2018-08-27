@@ -42,7 +42,7 @@ Route::post('/rooms', 'RoomsController@store');
 Route::get('/rooms/create', 'RoomsController@create'); 
 
 // goes to each room in part
-Route::get('/rooms/{room}', 'RoomsController@show'); 
+Route::get('/rooms/{room}', 'RoomsController@show')->name('room.show'); ; 
 
 // I created a new method for the admin to update since only an admin can update a room
 Route::get('/rooms/{room}/update', 'RoomsController@admin_show');

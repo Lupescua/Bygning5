@@ -9,6 +9,7 @@ use App\Booking;
 use Illuminate\Support\Facades\Input;
 use Auth;
 use Carbon\Carbon;
+use Symfony\Component\Routing\Route;
 
 class BookingController extends Controller
 {
@@ -32,7 +33,7 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Room $room)
     {     
         
         $this->validate(request(),['name'=>'required','description'=>'required','startDate'=>'required','endDate'=>'required']);
@@ -53,7 +54,11 @@ class BookingController extends Controller
         $book->save();
 
         //redirect to show_all page
-        return redirect()->route('rooms');
+        // return redirect()->route('rooms');
+        // return redirect(action('RoomsController@index'),compact('room'));
+        // return Route('/rooms/'.$room->id);
+        return redirect()->route('room.show', ['room' => $room->id]);
+        // route('name.route', ['room' => $room->id]) }}
     }
 
     /**
