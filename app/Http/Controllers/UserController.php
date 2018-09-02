@@ -26,7 +26,6 @@ class UserController extends Controller
     {
         
         $users = User::all();
-        // dd($users);
         return view('users.index',compact('users'));
     }
 
@@ -97,8 +96,17 @@ class UserController extends Controller
         $user->save();
         
         $events = Event::where('user_id', $user->id)->get();
-        return view('users.profile',compact('user','events'));
-    
+        return view('users.profile',compact('user','events'));   
+        
+    }
+
+    public function updateAdmin(Request $request)
+    {   
+        $user = User::where('id', $request['user_id'])->first();
+        $user->admin = $request['admin']; 
+        $user->update();
+        
+        return redirect(action('UserController@index')); 
         
     }
 

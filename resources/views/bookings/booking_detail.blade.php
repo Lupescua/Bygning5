@@ -3,7 +3,6 @@
 
 <div class="row featurette">
     <div class="col-md-7 order-md-2">
-        <!-- <h2 class="featurette-heading">Oh yeah,  ">{{$booking->name}}</a> is that good. -->
         <a name="{{$booking->id}}"></a>
         <h2 class="featurette-heading">Oh yeah, {{$booking->name}} is that good.
           <span class="text-muted">See for yourself.</span>
@@ -19,12 +18,19 @@
             commodo.
         </p>
         @if (Auth::check())
-            @if ($booking->bookable === 1)
-                 <button> Book </button>
+            @if (Auth::user()->id === $booking->user->id or Auth::user()->admin === 1)
+                    
+            <form action="/bookings/{{$booking->id}}" method="post">    
+                {!! method_field('delete') !!}        
+                {!! csrf_field() !!}
+                <input name="id" type="hidden" value="{{$booking->id}}">
+                <button>Delete booking</button>              
+            </form> 
             @endif 
-        @endif 
+        @endif
+
     </div>
     <div class="col-md-5 order-md-1">     
-            <img class="featurette-image img-fluid mx-auto" src="/img/bookings/{{$booking->image}}" data-src="holder.js/500x500/auto" alt="Generic placeholder image"> 
+            <img class="featurette-image img-fluid mx-auto" src="/img/books/{{$booking->image}}" data-src="holder.js/500x500/auto" alt="Generic placeholder image"> 
   </div>
 </div>

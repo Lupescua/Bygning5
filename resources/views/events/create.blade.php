@@ -24,24 +24,24 @@
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                {!! Form::label('start_date','Start Date:') !!}
+                {!! Form::label('startDate','Start Date:') !!}
                 <div>
-                    {!! Form::input('date','start_date',date('M-d-y'),['class'=>'form-control']) !!} {!! $errors->first('start_date','
-                    <p class="alert alert-danger">:message</p>') !!}
-                    {!! Form::input('time','start_time',null,['class'=>'form-control']) !!} {!! $errors->first('start_date','
+                    <input name="startDate" type="dateTime-local" class="form-control" id="startDate" value="20{{Carbon\Carbon::now()->format('y-m-d\TH:i')}}">
+                    {!! $errors->first('startDate','
                     <p class="alert alert-danger">:message</p>') !!}
                 </div>
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
-            {!! Form::label('end_date','End Date:') !!}
+                {!! Form::label('endDate','End Date:') !!}
                 <div>
-                    {!! Form::input('date','end_date',date('M-d-y'),['class'=>'form-control']) !!} {!! $errors->first('end_date','
-                    <p class="alert alert-danger">:message</p>') !!}
+                    <input name="endDate" type="dateTime-local" class="form-control" id="endDate" value="20{{Carbon\Carbon::now()->format('y-m-d\TH:i')}}">
+                    {!! $errors->first('end_date','<p class="alert alert-danger">:message</p>') !!}
                 </div>
             </div>
         </div>
+
         <div class="col-md-8 mb-3">
             <div class="form-group">
                 <label for="link">Event Link, if any</label>
@@ -72,7 +72,6 @@
     </div>
     <div class="form-group">
         <div class="row">
-            <!-- This action will route to the controller -->
             <button class="btn btn-primary offset-sm-7" type="submit">Add</button>
         </div>
     </div>

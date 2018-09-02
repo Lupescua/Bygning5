@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Event;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.index');
+        $events = Event::orderByDesc('start_date')->get();
+        
+        return view('home.index',compact('events'));
     }
 }

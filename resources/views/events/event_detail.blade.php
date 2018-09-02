@@ -17,10 +17,21 @@
             commodo.
         </p>
         @if (Auth::check())
-            @if ($event->bookable === 1)
+            <!-- @if ($event->bookable === 1) -->
                 <button> Book </button>
-            @endif 
+            <!-- @endif  -->
         @endif 
+        @if (Auth::check())
+            @if (Auth::user()->id === $event->user->id or Auth::user()->admin === 1)
+                    
+            <form action="/events/{{$event->id}}" method="post">    
+                {!! method_field('delete') !!}        
+                {!! csrf_field() !!}
+                <input name="id" type="hidden" value="{{$event->id}}">
+                <button>Delete event</button>              
+            </form> 
+            @endif 
+        @endif
     </div>
     <div class="col-md-5 order-md-1">     
             <img class="featurette-image img-fluid mx-auto" src="/img/events/{{$event->image}}" data-src="holder.js/500x500/auto" alt="Generic placeholder image"> 

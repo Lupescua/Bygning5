@@ -8,9 +8,9 @@
         </h2>
         <p class="lead"> You can find it at {{$room->adress}} on the {{$room->floor_nr}} floor </p>
         @if ($room->bookable === 0)
-        <p class="lead"> The room is currently booked </p>
+        <p class="lead"> The room is currently <strong>Booked</strong> </p>
         @elseif ($room->bookable === 1)
-        <p class="lead"> The room is currently bookable </p>
+        <p class="lead"> The room is currently <strong>Bookable</strong> </p>
         @endif
         <p class="lead"> {{$room->name}} Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper.
             Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.

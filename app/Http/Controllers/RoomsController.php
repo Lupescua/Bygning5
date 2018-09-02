@@ -46,7 +46,7 @@ class RoomsController extends Controller
     public function show(Room $room) 
     {
         
-        $bookings = Booking::where('room_id', $room->id)->get();
+        $bookings = Booking::where('room_id', $room->id)->orderByDesc('start_date')->get();
         if($bookings->count()) {
             foreach ($bookings as $key => $value) {
                 $events[] = Calendar::event(
@@ -112,9 +112,9 @@ class RoomsController extends Controller
         $room->floor_nr = request('floor_nr');
         $room->adress = request('adress');
         if (request('bookable') == 'on'){
-        $room->bookable = 1;
-        }else{
         $room->bookable = 0;
+        }else{
+        $room->bookable = 1;
         }                
         // $room->image = request('image');
         if(Input::hasFile('image')){
@@ -122,7 +122,7 @@ class RoomsController extends Controller
             $room->image = $file->getClientOriginalName();
             $file->move('img\rooms', $file->getClientOriginalName());
         }
-        $room->save();
+        $room->update();
 
         //redirect to show_all page
         return redirect(action('RoomsController@index'));  
@@ -131,9 +131,13 @@ class RoomsController extends Controller
 
     public function destroy(Room $room) 
     {
-         dd($room);
+        //  dd($room);
         $room->delete();
         return redirect(action('RoomsController@index'));
+        
+        // $booking = Booking::findOrFail($id);
+        // $booking->delete();
+        // return back();
     }
     
 }

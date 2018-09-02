@@ -13,12 +13,12 @@ use App\Http\Controllers\RoomsController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 //I'm using this as main page to test code
-Route::get('/', function () {
-    return view('home.index');
-});
+// Route::get('/home', function () {
+//     return view('home.index');
+// });
 
 Auth::routes();
 // ====================
@@ -28,6 +28,9 @@ Route::get('/profile/{user}','UserController@show');
 
 // update user profile
 Route::post('/profile/{user}', 'UserController@update');
+
+// update user profile
+Route::post('/profile/{user}/update', 'UserController@updateAdmin');
 
 // delete user profile
 Route::delete('/profile/{user}', 'UserController@destroy')->name('users.destroy');;
@@ -69,6 +72,9 @@ Route::post('/rooms/{room}/book', 'BookingController@create')->name('room.create
 // goes to each booking in part
 Route::get('/bookings/{booking}','BookingController@show');
  
+// delete each booking in part
+Route::delete('/bookings/{booking}','BookingController@destroy');
+
 // ====================
 // EVENTS
 // goes to the Events page
@@ -82,7 +88,8 @@ Route::post('/events', 'EventsController@store');
 
 // goes to each event in part
 Route::get('/events/{event}','EventsController@show');
-
-// Route::post('/events/{event}','EventsController@update');
+ 
+// delete each booking in part
+Route::delete('/events/{event}','EventsController@destroy');
 
 

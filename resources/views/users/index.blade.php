@@ -7,8 +7,9 @@
             @foreach ($users as $user)
                 @include ('users.simple_profile')
             @endforeach
-        @endif
+        @elseif (Auth::user()->admin === 0)
         <h1>Sorry you are not an Admin user</h1>
+        @endif
     @endif
 @endsection
 

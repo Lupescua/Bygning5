@@ -23,7 +23,7 @@ class EventsController extends Controller
     
     public function index() 
     {       
-        $data = Event::all();
+        $data = Event::orderByDesc('start_date')->get();
         if($data->count()) {
             foreach ($data as $key => $value) {
                 $events[] = Calendar::event(
@@ -43,7 +43,7 @@ class EventsController extends Controller
         $calendar = Calendar::addEvents($events);
 
         return view('events.fullcalendar', compact('calendar','data'));
-        // return view('events.index',compact('events'));
+        
     }
     
     public function show(Event $event) 
@@ -116,8 +116,10 @@ class EventsController extends Controller
         return view('events.show',compact('event'));
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-
+        $event = Event::find($id);
+        $event->delete();
+        return back();
     }
 }

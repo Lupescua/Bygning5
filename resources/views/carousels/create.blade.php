@@ -40,16 +40,11 @@
                 </div>
             </div>
         </div>
-       
         <div class="col-md-8 mb-3">
-            <div class="form-group row">
-                <div class='input-group' id='bookable_room'>
-                    @if (Auth::check())    
-                        @if (Auth::user()->admin === 1)
-                            <label for="bookable">Bookable</label>
-                            <input name="bookable" type='checkbox' id="bookable">
-                        @endif
-                    @endif
+            <div class="form-group">
+                <div class='input-group date' id='bookable_room'>
+                    <input name="bookable" type='checkbox' id="bookable" />
+                    <label for="bookable">Admin only - Bookable</label>
                 </div>
             </div>
         </div>
