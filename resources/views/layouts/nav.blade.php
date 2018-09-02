@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand active" href="{{ url('/') }}">
             {{ config('app.name', 'Bygning 5') }}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -11,18 +11,24 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url('/home') }}">Home</a>
+                <!-- <li class="nav-item active"> -->
+                    <!-- <a class="nav-link" href="{{ url('/home') }}">Home</a> -->
                     <!-- <span class="sr-only">(current)</span> -->
-                    </a>
-                </li>
+                    <!-- </a> -->
+                <!-- </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/rooms') }}">Rooms</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="{{ url('/events') }}">Events
                     </a>
+                </li>            
+                @if (Auth::user()->admin === 1)       
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ url('/all_users') }}">All Users
+                    </a>
                 </li>
+                @endif
             </ul>
 
             <!-- Right Side Of Navbar -->

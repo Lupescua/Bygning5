@@ -53,12 +53,7 @@ class BookingController extends Controller
         }
         $book->save();
 
-        //redirect to show_all page
-        // return redirect()->route('rooms');
-        // return redirect(action('RoomsController@index'),compact('room'));
-        // return Route('/rooms/'.$room->id);
         return redirect()->route('room.show', ['room' => $room->id]);
-        // route('name.route', ['room' => $room->id]) }}
     }
 
     /**
@@ -80,7 +75,8 @@ class BookingController extends Controller
      */
     public function show(Booking $booking) 
     {
-        return view('bookings.show',compact('bookings'));
+
+        return view('bookings.show',compact('booking'));
     }
 
     /**

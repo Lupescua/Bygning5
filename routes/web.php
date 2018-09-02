@@ -29,6 +29,11 @@ Route::get('/profile/{user}','UserController@show');
 // update user profile
 Route::post('/profile/{user}', 'UserController@update');
 
+// delete user profile
+Route::delete('/profile/{user}', 'UserController@destroy')->name('users.destroy');;
+
+// see all users
+Route::get('/all_users','UserController@index');
 // ====================
 //  ROOMS
 

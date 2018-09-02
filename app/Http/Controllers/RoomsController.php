@@ -28,8 +28,9 @@ class RoomsController extends Controller
                     null,
                     // Add color and link on event
 	                [
-	                    'color' => '#f05050',
-	                    'url' => '/bookings/"$booking->id"',
+                        'color' => '#f05050',
+                        // somehow show the adress of the event
+	                    'url' => "/bookings/".$value->id,
 	                ]
                 );
             }
@@ -41,6 +42,7 @@ class RoomsController extends Controller
         return view('rooms.index',compact('calendar','rooms'));
     }
     
+    // On the Room page
     public function show(Room $room) 
     {
         
@@ -86,7 +88,6 @@ class RoomsController extends Controller
         }else{
         $room->bookable = 0;
         }                
-        // $room->image = request('image');
         if(Input::hasFile('image')){
             $file = Input::file('image');
             $room->image = $file->getClientOriginalName();

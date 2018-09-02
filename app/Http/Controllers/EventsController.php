@@ -35,7 +35,7 @@ class EventsController extends Controller
                     // Add color and link on event
 	                [
 	                    'color' => '#f05050',
-	                    'url' => 'pass here url and any route',
+	                    'url' => "/events/".$value->id,
 	                ]
                 );
             }

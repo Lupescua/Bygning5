@@ -7,6 +7,7 @@ use App\User;
 use Image;
 use Auth;
 use App\Event;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -23,7 +24,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        
+        $users = User::all();
+        // dd($users);
+        return view('users.index',compact('users'));
     }
 
     /**
@@ -106,6 +110,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        $users = User::all();
+        return view('users.index',compact('users'));
     }
 }
