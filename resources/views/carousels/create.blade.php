@@ -1,35 +1,34 @@
-@extends('layouts.layout') @section('title') Add a new Room @endsection @section('content')
-<form method="post" action="/rooms" enctype="multipart/form-data">
-    <!-- {{ action('RoomsController@create') }} -->
+@extends('layouts.layout') @section('title') Add a new Carousel Picture @endsection @section('content')
+<form method="post" action="/carousel/new" enctype="multipart/form-data">
     {{csrf_field()}}
     <div class="form-row">
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                <label for="name">Room Title</label>
-                <input name="name" type="text" class="form-control" id="name" placeholder="Room Name" require>
+                <label for="name">Carousel Title</label>
+                <input name="name" type="text" class="form-control" id="name" placeholder="Carousel Name" require>
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                <label for="description">Room Description</label>
-                <textarea name="description" type="text" class="form-control" id="description" placeholder="Room Description"></textarea>
+                <label for="description">Carousel Description</label>
+                <textarea name="description" type="text" class="form-control" id="description" placeholder="Carousel Description"></textarea>
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                <label for="adress">Building Adress</label>
-                <input name="adress" type="text" class="form-control" id="adress" placeholder="Nicolai Bygning 5">
+                <label for="button">Button title</label>
+                <input name="button" type="text" class="form-control" id="button" placeholder="Nicolai Bygning 5">
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                <label for="floor_nr">Floor Number</label>
-                <input name="floor_nr" type="text" class="form-control" id="floor_nr" placeholder="Floor Number">
+                <label for="link">Button link</label>
+                <input name="link" type="text" class="form-control" id="link" placeholder="Floor Number">
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group row">
-                <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Upload Room Image') }}</label>
+                <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Upload Carousel Image') }}</label>
                 <div class="col-md-6">
                     <input id="image" type="file" name="image" value="{{ old('image') }}" required>
                     @if ($errors->has('image'))
@@ -40,19 +39,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8 mb-3">
-            <div class="form-group">
-                <div class='input-group date' id='bookable_room'>
-                    <input name="bookable" type='checkbox' id="bookable" />
-                    <label for="bookable">Admin only - Bookable</label>
-                </div>
-            </div>
-        </div>
+        
     </div>
     <div class="form-group">
         <div class="row">
-            <!-- This action will route to the controller -->
-            <button class="btn btn-primary offset-sm-7" type="submit">Add</button>
+            <button class="btn btn-primary offset-sm-7" type="submit">Add </button>
         </div>
     </div>
     @include ('layouts.errors')

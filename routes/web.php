@@ -93,3 +93,7 @@ Route::get('/events/{event}','EventsController@show');
 Route::delete('/events/{event}','EventsController@destroy');
 
 
+Route::post('/carousel/create', 'CarouselController@create'); 
+
+
+

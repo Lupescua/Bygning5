@@ -14,7 +14,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('index');
+        
     }
 
     /**
@@ -25,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $events = Event::orderByDesc('start_date')->get();
-        
+
         return view('home.index',compact('events'));
     }
 }

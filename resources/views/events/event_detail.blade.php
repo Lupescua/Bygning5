@@ -17,11 +17,6 @@
             commodo.
         </p>
         @if (Auth::check())
-            <!-- @if ($event->bookable === 1) -->
-                <button> Book </button>
-            <!-- @endif  -->
-        @endif 
-        @if (Auth::check())
             @if (Auth::user()->id === $event->user->id or Auth::user()->admin === 1)
                     
             <form action="/events/{{$event->id}}" method="post">    

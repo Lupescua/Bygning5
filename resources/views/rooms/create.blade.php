@@ -18,7 +18,7 @@
         <div class="col-md-8 mb-3">
             <div class="form-group">
                 <label for="adress">Building Adress</label>
-                <input name="adress" type="text" class="form-control" id="adress" placeholder="Nicolai Bygning 5">
+                <input name="adress" type="text" class="form-control" id="adress" placeholder="Nicolai Bygning 5" value="Nicolai Bygning 5">
             </div>
         </div>
         <div class="col-md-8 mb-3">
@@ -27,6 +27,7 @@
                 <input name="floor_nr" type="text" class="form-control" id="floor_nr" placeholder="Floor Number">
             </div>
         </div>
+
         <div class="col-md-8 mb-3">
             <div class="form-group row">
                 <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Upload Room Image') }}</label>

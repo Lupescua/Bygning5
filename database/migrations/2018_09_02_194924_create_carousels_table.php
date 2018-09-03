@@ -20,7 +20,6 @@ class CreateCarouselsTable extends Migration
             $table->string('image'); 
             $table->string('button'); 
             $table->string('link'); 
-            $table->boolean('active')->default('1');
             $table->timestamps();
         });
     }
