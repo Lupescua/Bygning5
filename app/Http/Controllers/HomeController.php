@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use App\Carousel;
 
 class HomeController extends Controller
 {
@@ -26,7 +27,8 @@ class HomeController extends Controller
     public function index()
     {
         $events = Event::orderByDesc('start_date')->get();
+        $carousels = Carousel::all();
 
-        return view('home.index',compact('events'));
+        return view('home.index',compact('events','carousels'));
     }
 }

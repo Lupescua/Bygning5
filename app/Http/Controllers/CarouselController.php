@@ -24,7 +24,7 @@ class CarouselController extends Controller
      */
     public function create()
     {
-        //
+       
     }
 
     /**
@@ -57,7 +57,7 @@ class CarouselController extends Controller
      */
     public function edit(Carousel $carousel)
     {
-        //
+        return view('carousels.edit');
     }
 
     /**
