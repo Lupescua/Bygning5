@@ -1,10 +1,6 @@
 <hr class="featurette-divider">
 
 <div class="container row">
-
-        <!-- <div class="col-md-5 order-md-2 row"> 
-            <img src="/img/user/{{$user->image}}" alt="{{$user->name}}" style='width:50px; height:50px; float:left; border-radius:50%; margin-right:25px;'>           
-        </div> -->
         
         <div class="col-md-5 order-md-1 row">  
                      <h1>{{$user->id}}</h1> <img src="/img/user/{{$user->image}}" alt="{{$user->name}}" style='width:50px; height:50px; float:left; border-radius:50%; margin-right:25px;'>           

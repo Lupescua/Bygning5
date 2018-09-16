@@ -2,14 +2,14 @@
 <hr class="featurette-divider">
 
 <div>
-    <form class="row featurette" enctype="multipart/form-data" action="/profile/{user}" method="POST">
+    <form class="row featurette" enctype="multipart/form-data" action="/profile/{{$user->id}}" method="POST">
+        {{ method_field('PUT') }}
         {{csrf_field()}}
         <div class="col-md-7 order-md-1">
             <img src="/img/user/{{$user->image}}" alt="{{$user->name}}" style='width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;'>
             <h1><input name="name" type="text" placeholder="{{$user->name}}" value="{{$user->name}}"></h1>
                  
             <input name="email" class="lead" type="email" placeholder="{{$user->email}}" value="{{$user->email}}">
-            <p class="lead"> Somehow I shuld show all the events I made </p>
         </div>
 
         <div class="col-md-7 order-md-2">

@@ -81,11 +81,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {   
-        $user = Auth::user();     
-        // Handle the user upload of avatar
-    	if($request->hasFile('image')){
+        $user =  User::where('id', $id)->first();
+        if($request->hasFile('image')){
     		$image = $request->file('image');
     		$filename = $image->getClientOriginalName();
     		Image::make($image)->resize(300, 300)->save( public_path('/img/user/' . $filename ) );            
@@ -95,8 +94,7 @@ class UserController extends Controller
         $user->email =  $request['email']; 
         $user->save();
         
-        $events = Event::where('user_id', $user->id)->get();
-        return view('users.profile',compact('user','events'));   
+        return redirect(action('UserController@index')); 
         
     }
 

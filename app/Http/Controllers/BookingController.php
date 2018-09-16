@@ -25,6 +25,7 @@ class BookingController extends Controller
      */
     public function index(Room $room)
     {            
+        // dd($room);
         return view('bookings.create',compact('room'));
     }
 

@@ -43,7 +43,7 @@
     </div>
     <div class="form-group">
         <div class="row">
-            <button class="btn btn-primary offset-sm-7" type="submit">Add </button>
+            {{ Form::submit('Add', ['class' => 'btn btn-primary offset-sm-7']) }}
         </div>
     </div>
     @include ('layouts.errors')

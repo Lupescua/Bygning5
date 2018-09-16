@@ -27,10 +27,10 @@ Auth::routes();
 Route::get('/profile/{user}','UserController@show');
 
 // update user profile
-Route::post('/profile/{user}', 'UserController@update');
+Route::put('/profile/{id}', 'UserController@update');
 
 // update user profile
-Route::post('/profile/{user}/update', 'UserController@updateAdmin');
+Route::post('/profile/{id}/update', 'UserController@updateAdmin');
 
 // delete user profile
 Route::delete('/profile/{user}', 'UserController@destroy')->name('users.destroy');;

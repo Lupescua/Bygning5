@@ -8,16 +8,18 @@
         </h2>
         <p class="lead"> You can find it at {{$room->adress}} on the {{$room->floor_nr}} floor </p>
         @if ($room->bookable === 0)
-        <p class="lead"> The room is currently <strong>Booked</strong> </p>
+        <p class="lead"> The room currently <strong>Can Not Be</strong> Booked</p>
         @elseif ($room->bookable === 1)
-        <p class="lead"> The room is currently <strong>Bookable</strong> </p>
+        <p class="lead"> The room currently <strong>Can Be</strong> Booked </p>
         @endif
         <p class="lead"> {{$room->name}} Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper.
             Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
         </p>
         <div>
             @if (Auth::check())
-            <a class="btn order-md-1" href="/rooms/{{$room->id}}/book"> Book </a>         
+                @if ($room->bookable === 1)
+                    <a class="btn order-md-1" href="/rooms/{{$room->id}}/book"> Book </a>   
+                @endif      
                 @if (Auth::user()->admin === 1)
                     <a class="btn order-md-2" href="/rooms/{{$room->id}}/update"> Update </a>
                     <a class="btn order-md-3" href="/rooms/{{$room->id}}/delete"> Delete </a>

@@ -53,14 +53,18 @@
                 <div class='input-group date' id='bookable_room'>
                     @if (Auth::check())    
                         @if (Auth::user()->admin === 1)
-                            @if ($room->bookable === 1)
-                            <input name="bookable" type='checkbox' id="bookable" checked>
+                        <label for="bookable">Can the room be booked? Yes?</label><input {{isset($room['bookable'])&&$room['bookable']=='1' ? 'checked' : '0'}}value="1" type="checkbox" name="bookable">
+                        
+
+
+                            {{-- @if ($room->bookable === 1)
+                            <input name="bookable" type='checkbox' value="1" checked>
                             @elseif ($room->bookable === 0)
-                            <input name="bookable" type='checkbox' id="bookable" <div class="container">
-                            @endif
+                            <input name="bookable" type='checkbox' value="0" >
+                            <label for="bookable">The room currently Can Not be Booked</label>
+                            @endif --}}
                         @endif
                     @endif
-                    <label for="bookable">Admin only - Bookable</label>
                 </div>
             </div>
         </div>

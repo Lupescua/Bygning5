@@ -7,36 +7,36 @@
         <div class="col-md-8 mb-3">
             <div class="form-group">
                 <label for="name">Event Title</label>
-                <input name="name" type="text" class="form-control" id="name" placeholder="Event Name" require>
+                <input name="name" type="text" class="form-control" id="name" placeholder="Event Name" required>
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
                 <label for="description">Event Description</label>
-                <textarea name="description" type="text" class="form-control" id="description" placeholder="Event Description"></textarea>
+                <textarea name="description" type="text" class="form-control" id="description" placeholder="Event Description" required></textarea>
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
                 <label for="adress">Adress</label>
-                <input name="adress" type="text" class="form-control" id="adress" placeholder="Event adress">
+                <input name="adress" type="text" class="form-control" id="adress" placeholder="Event adress" required>
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
                 {!! Form::label('startDate','Start Date:') !!}
                 <div>
-                    <input name="startDate" type="dateTime-local" class="form-control" id="startDate" value="20{{Carbon\Carbon::now()->format('y-m-d\TH:i')}}">
-                    {!! $errors->first('startDate','
+                    <input name="start_date" type="dateTime-local" class="form-control" id="startDate" value="20{{Carbon\Carbon::now()->format('y-m-d\TH:i')}}">
+                    {!! $errors->first('start_date','
                     <p class="alert alert-danger">:message</p>') !!}
                 </div>
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                {!! Form::label('endDate','End Date:') !!}
+                {!! Form::label('end_date','End Date:') !!}
                 <div>
-                    <input name="endDate" type="dateTime-local" class="form-control" id="endDate" value="20{{Carbon\Carbon::now()->format('y-m-d\TH:i')}}">
+                    <input name="end_date" type="dateTime-local" class="form-control" id="endDate" value="20{{Carbon\Carbon::now()->format('y-m-d\TH:i')}}">
                     {!! $errors->first('end_date','<p class="alert alert-danger">:message</p>') !!}
                 </div>
             </div>
@@ -44,8 +44,10 @@
 
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                <label for="link">Event Link, if any</label>
-                <input name="link" type="text" class="form-control" id="link" placeholder="Event link">
+                <label for="link">Event Link: <br/>
+                    Example: "https://www.somewhere.com"
+                </label>
+                <input name="link" type="link" class="form-control" id="link" placeholder="Event link" value="null">
             </div>
         </div>
         <div class="col-md-8 mb-3">
@@ -58,14 +60,6 @@
                         <strong>{{ $errors->first('image') }}</strong>
                     </span>
                     @endif
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8 mb-3">
-            <div class="form-group">
-                <div class='input-group date' id='bookable_room'>
-                    <input name="bookable" type='checkbox' id="bookable" />
-                    <label for="bookable">Admin only - Bookable</label>
                 </div>
             </div>
         </div>

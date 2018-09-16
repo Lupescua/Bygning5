@@ -47,6 +47,7 @@ class RoomsController extends Controller
     {
         
         $bookings = Booking::where('room_id', $room->id)->orderByDesc('start_date')->get();
+        
         if($bookings->count()) {
             foreach ($bookings as $key => $value) {
                 $events[] = Calendar::event(
@@ -63,9 +64,12 @@ class RoomsController extends Controller
 	                ]
                 );
             }
-        }
+       
         $calendar = Calendar::addEvents($events);
-        return view('rooms.show',compact('room','bookings','calendar'));
+            return view('rooms.show',compact('room','bookings','calendar'));
+        }else{
+            return view('rooms.show',compact('room'));
+        }
     }
     
     public function create()
@@ -111,10 +115,14 @@ class RoomsController extends Controller
         $room->description = request('description');
         $room->floor_nr = request('floor_nr');
         $room->adress = request('adress');
-        if (request('bookable') == 'on'){
-        $room->bookable = 0;
+        // dd(request('bookable'));
+        if (request('bookable') === "on"){
+            $room->bookable = 0;
+            // dd("the request is ".request('bookable'));
         }else{
-        $room->bookable = 1;
+            // dd("the request is".request('bookable'));
+
+            $room->bookable = 1;
         }                
         // $room->image = request('image');
         if(Input::hasFile('image')){
@@ -122,7 +130,8 @@ class RoomsController extends Controller
             $room->image = $file->getClientOriginalName();
             $file->move('img\rooms', $file->getClientOriginalName());
         }
-        $room->update();
+        $room->save();
+        // dd($room->bookable,$room);
 
         //redirect to show_all page
         return redirect(action('RoomsController@index'));  

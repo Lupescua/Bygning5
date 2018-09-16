@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             // admin No = 0
             $table->boolean('admin')->default('0');
-            $table->string('image')->default('avatar.jpg');
+            $table->string('image')->default('default.jpg');
             $table->rememberToken();
             $table->timestamps();
         });

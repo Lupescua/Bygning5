@@ -19,7 +19,6 @@ class CreateEventsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->text('adress');
-            // the dates contain the start date and start hour, and end date and end hour
             $table->dateTime('start_date');
             $table->dateTime('end_date');  
             $table->string('image'); 

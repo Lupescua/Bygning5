@@ -6,25 +6,25 @@
         <div class="col-md-8 mb-3">
             <div class="form-group">
                 <label for="name">Room Title</label>
-                <input name="name" type="text" class="form-control" id="name" placeholder="Room Name" require>
+                <input name="name" type="text" class="form-control" id="name" placeholder="Room Name" required>
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
                 <label for="description">Room Description</label>
-                <textarea name="description" type="text" class="form-control" id="description" placeholder="Room Description"></textarea>
+                <textarea name="description" type="text" class="form-control" id="description" placeholder="Room Description" required></textarea>
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
                 <label for="adress">Building Adress</label>
-                <input name="adress" type="text" class="form-control" id="adress" placeholder="Nicolai Bygning 5" value="Nicolai Bygning 5">
+                <input name="adress" type="text" class="form-control" id="adress" placeholder="Nicolai Bygning 5" value="Nicolai Bygning 5" required>
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
                 <label for="floor_nr">Floor Number</label>
-                <input name="floor_nr" type="text" class="form-control" id="floor_nr" placeholder="Floor Number">
+                <input name="floor_nr" type="text" class="form-control" id="floor_nr" placeholder="Floor Number" required>
             </div>
         </div>
 

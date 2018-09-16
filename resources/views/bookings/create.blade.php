@@ -1,25 +1,24 @@
 @extends('layouts.layout') @section('title') Book this room @endsection @section('content')
 
-<form method="post" action="/rooms/{{$room->id}}/book" enctype="multipart/form-data">
-    {{csrf_field()}}
-  <input type="hidden" id="room_id" name="room_id" value="$room->id">
+{!! Form::open( array('files' => TRUE,'method' => 'post', 'url' => "/rooms/$room->id/book")) !!}
+{{ Form::hidden('room_id', null,['value' => $room->id]) }}
     <div class="form-row">
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                <label for="name">Event Title</label>
-                <input name="name" type="text" class="form-control" id="name" placeholder="Event Name" require>
+                {{ Form::label('Event Title', null, ['class' => 'col-form-label']) }}
+                {{ Form::text('name', null, ['class' => 'form-control','required','placeholder'=>"Event Name"]) }}
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
                 <label for="description">Event Description</label>
-                <textarea name="description" type="text" class="form-control" id="description" placeholder="Event Description"></textarea>
+                <textarea name="description" type="text" class="form-control" id="description" placeholder="Event Description" required></textarea>
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                <label for="adress">Adress</label>
-                <input name="adress" type="text" class="form-control" id="adress" placeholder="Event adress">
+                {{ Form::label('Adress', null, ['class' => 'col-form-label','for'=>"adress"]) }}
+                {{ Form::text('adress',null,['disabled'=>'disabled','class' => 'form-control','value'=>"$room->adress",'placeholder'=>"Room "."$room->name"." at the adress: "."$room->adress"]) }}
             </div>
         </div>
         <div class="col-md-8 mb-3">
@@ -27,8 +26,7 @@
                 {!! Form::label('startDate','Start Date:') !!}
                 <div>
                     <input name="startDate" type="dateTime-local" class="form-control" id="startDate" value="20{{Carbon\Carbon::now()->format('y-m-d\TH:i')}}">
-                    {!! $errors->first('startDate','
-                    <p class="alert alert-danger">:message</p>') !!}
+                    {!! $errors->first('startDate','<p class="alert alert-danger">:message</p>') !!}
                 </div>
             </div>
         </div>
@@ -44,7 +42,7 @@
         <div class="col-md-8 mb-3">
             <div class="form-group">
                 <label for="link">Event Link, if any</label>
-                <input name="link" type="text" class="form-control" id="link" placeholder="Event link">
+                <input name="link" type="text" class="form-control" id="link" placeholder="Event link" required>
             </div>
         </div>
         <div class="col-md-8 mb-3">
@@ -61,12 +59,12 @@
         </div>
 
     </div>
+</div>
     <div class="form-group">
         <div class="row">
-            <!-- This action will route to the controller -->
-            <button class="btn btn-primary offset-sm-7" type="submit">Book</button>
+            {{ Form::submit('Book', ['class' => 'btn btn-primary offset-sm-7']) }}
         </div>
     </div>
     @include ('layouts.errors')
-</form>
+    {{ Form::close() }}
 @endsection
