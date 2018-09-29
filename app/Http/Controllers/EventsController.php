@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use App\Event;
 use App\User;
 use Calendar;
@@ -24,6 +25,7 @@ class EventsController extends Controller
     public function index() 
     {       
         $data = Event::orderByDesc('start_date')->get();
+        
         if($data->count()) {
             foreach ($data as $key => $value) {
                 $events[] = Calendar::event(
@@ -33,13 +35,13 @@ class EventsController extends Controller
                     new \DateTime($value->end_date.' +1 day'),
                     null,
                     // Add color and link on event
-	                [
-	                    'color' => '#f05050',
-	                    'url' => "/events/".$value->id,
-	                ]
+                    [
+                        'color' => '#f05050',
+                        'url' => "/events/".$value->id,
+                    ]
                 );
             }
-        }
+        } 
         $calendar = Calendar::addEvents($events);
 
         return view('events.fullcalendar', compact('calendar','data'));
@@ -60,21 +62,14 @@ class EventsController extends Controller
 
     public function store( User $user)
     {
-        $request = request()->all();
-        $validator = Validator::make($request,['name'=>'required']);
+        $validator=$this->validate(request(),['name'=>'required','description'=>'required','start_date'=>'required|date|after:now','end_date'=>'required|date|after:now','adress'=>'required','image'=>'required','link'=>'required|url']);
         
-        if ($validator->fails()){
-            \Session::flash('warning','Please enter the valid details');
-            return Redirect::to('/events/create')->withInput()->withErrors($validator);
-        }
-
         $event = new Event();
         $event->name = request('name');      
         $event->user_id = auth()->id();
         $event->description = request('description');
         $event->adress = request('adress');    
         $event->start_date = request('start_date');
-        // 'start_date' => strtotime(request('start_date').request('start_time')),
         $event->end_date = request('end_date');
         $event->link = request('link');            
 
@@ -87,23 +82,19 @@ class EventsController extends Controller
 
         $event->save();
 
-        \Session::flash('succes','A new Event has been added');
-
-        //redirect to show_all page
-        return redirect(action('EventsController@index'));
+        return redirect(action('EventsController@index'))->with('success',true)->with('message',"Event created");
     }
-
+// I have the controller but I did not create a view or a route Yet!
     public function update(Request $request, $id)
     {
-
+        $validator = $this->validate(request(),['name'=>'required','description'=>'required','start_date'=>'required','end_date'=>'required','adress'=>'required','image'=>'required','link'=>'required|url']);
+ 
         $event = Event::find($id)->get();
         $event->name = $request['name'];      
         $event->user_id = Auth::user()->id;
-        // 'user_id' => $user->id,
         $event->description = $request['description'];
         $event->adress = $request['adress'];    
         $event->start_date = $request ['start_date'];
-        // 'start_date' => strtotime(request('start_date').request('start_time')),
         $event->end_date = $request ['end_date'];
         $event->link = $request ['link'];            
         if(Input::hasFile('image')){
@@ -113,13 +104,13 @@ class EventsController extends Controller
         }
         $event->save();
        
-        return view('events.show',compact('event'));
+        return view('events.show',compact('event'))->with('success',true)->with('message',"Event updated");
     }
 
     public function destroy($id)
     {
         $event = Event::find($id);
         $event->delete();
-        return back();
+        return back()->with('success',true)->with('message',"Event deleted");
     }
 }

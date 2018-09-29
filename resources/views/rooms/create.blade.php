@@ -1,6 +1,5 @@
 @extends('layouts.layout') @section('title') Add a new Room @endsection @section('content')
 <form method="post" action="/rooms" enctype="multipart/form-data">
-    <!-- {{ action('RoomsController@create') }} -->
     {{csrf_field()}}
     <div class="form-row">
         <div class="col-md-8 mb-3">

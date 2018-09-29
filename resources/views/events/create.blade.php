@@ -1,7 +1,6 @@
 @extends('layouts.layout') @section('title') Add a new Event @endsection @section('content')
 
 <form method="post" action="/events" enctype="multipart/form-data">
-    <!-- {{ action('RoomsController@create') }} -->
     {{csrf_field()}}
     <div class="form-row">
         <div class="col-md-8 mb-3">
@@ -26,7 +25,7 @@
             <div class="form-group">
                 {!! Form::label('startDate','Start Date:') !!}
                 <div>
-                    <input name="start_date" type="dateTime-local" class="form-control" id="startDate" value="20{{Carbon\Carbon::now()->format('y-m-d\TH:i')}}">
+                    <input name="start_date" type="dateTime-local" class="form-control" id="startDate" value="20{{Carbon\Carbon::tomorrow()->format('y-m-d\TH:i')}}">
                     {!! $errors->first('start_date','
                     <p class="alert alert-danger">:message</p>') !!}
                 </div>
@@ -36,7 +35,7 @@
             <div class="form-group">
                 {!! Form::label('end_date','End Date:') !!}
                 <div>
-                    <input name="end_date" type="dateTime-local" class="form-control" id="endDate" value="20{{Carbon\Carbon::now()->format('y-m-d\TH:i')}}">
+                    <input name="end_date" type="dateTime-local" class="form-control" id="endDate" value="20{{Carbon\Carbon::tomorrow()->format('y-m-d\TH:i')}}">
                     {!! $errors->first('end_date','<p class="alert alert-danger">:message</p>') !!}
                 </div>
             </div>
@@ -47,7 +46,7 @@
                 <label for="link">Event Link: <br/>
                     Example: "https://www.somewhere.com"
                 </label>
-                <input name="link" type="link" class="form-control" id="link" placeholder="Event link" value="null">
+                <input name="link" type="link" class="form-control" id="link" placeholder="Event link" required>
             </div>
         </div>
         <div class="col-md-8 mb-3">

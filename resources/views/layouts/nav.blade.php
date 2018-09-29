@@ -17,7 +17,11 @@
                 <li class="nav-item">
                     <a class="nav-link " href="{{ url('/events') }}">Events
                     </a>
-                </li>     
+                </li>    
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ url('/partners') }}">Partners
+                    </a>
+                </li>  
                 @if (Auth::check())         
                 @if (Auth::user()->admin === 1)       
                 <li class="nav-item">

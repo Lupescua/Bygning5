@@ -36,9 +36,27 @@ class BookingController extends Controller
      */
     public function create(Room $room)
     {     
+        $this->validate(request(),['name'=>'required','description'=>'required','start_date'=>'required|date|after:now','end_date'=>'required|date|after:now','image'=>'required','link'=>'required']);
         
-        $this->validate(request(),['name'=>'required','description'=>'required','startDate'=>'required','endDate'=>'required']);
-        
+        $old_bookings = Booking::all();
+        foreach($old_bookings as $old_booking)
+        {
+        if($room->id===$old_booking->room->id){
+        $old_start = $old_booking->start_date;
+        $old_end = $old_booking->end_date;
+        $proposed_start = request('start_date');
+            if($proposed_start>$old_start){
+                $this->validate(request(),['start_date' => "after:$old_end"]);
+                // dd($proposed_start,$old_start,"after start");
+            }
+            if($proposed_start<$old_end){
+                $this->validate(request(),['start_date' => "after:$old_end"]);
+                dd($proposed_start,$old_end,"before end");
+            }
+            
+        }}
+
+
         $book = new Booking();
         $book->name = request('name');
         $book->description = request('description');

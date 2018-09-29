@@ -14,6 +14,7 @@ use App\Http\Controllers\RoomsController;
 |
 */
 Route::get('/', 'HomeController@index')->name('home');
+Route::post('/$id', 'HomeController@updateCarousel')->name('updateCarousel');
 
 //I'm using this as main page to test code
 // Route::get('/home', function () {
@@ -56,7 +57,7 @@ Route::get('/rooms/{room}', 'RoomsController@show')->name('room.show'); ;
 Route::get('/rooms/{room}/update', 'RoomsController@admin_show');
 
 // goes to update room 
-Route::post('/rooms/{room}/update', 'RoomsController@update');
+Route::post('/rooms/{room}/update', 'RoomsController@update')->name('room.update'); ; 
 // ***
 // goes to delete room 
 Route::get('/rooms/{room}/delete', 'RoomsController@destroy');         
@@ -80,11 +81,11 @@ Route::delete('/bookings/{booking}','BookingController@destroy');
 // goes to the Events page
 Route::get('/events', 'EventsController@index');
 
-// Adds a new room to the DB
-Route::get('/events/create', 'EventsController@create'); 
-
-// goes to the save new room page
+// stores a new event
 Route::post('/events', 'EventsController@store');
+
+// Adds a new event
+Route::get('/events/create', 'EventsController@create'); 
 
 // goes to each event in part
 Route::get('/events/{event}','EventsController@show');
@@ -92,8 +93,14 @@ Route::get('/events/{event}','EventsController@show');
 // delete each booking in part
 Route::delete('/events/{event}','EventsController@destroy');
 
-
 Route::post('/carousel/edit', 'CarouselController@edit'); 
+
+// partners
+Route::get('/partners','PartnersController@index');
+Route::post('/partners','PartnersController@edit');
+Route::get('/partners/create','PartnersController@create');
+Route::post('/partners/create','PartnersController@store');
+
 
 
 

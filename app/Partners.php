@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Carousel extends Model
+class Partners extends Model
 {
     protected $fillable = [
-        'name','description','image','link', 'button'
+        'name','description','image','link'
     ];
 }

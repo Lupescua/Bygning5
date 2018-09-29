@@ -23,33 +23,34 @@
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                {!! Form::label('startDate','Start Date:') !!}
+                {!! Form::label('start_date','Start Date:') !!}
                 <div>
-                    <input name="startDate" type="dateTime-local" class="form-control" id="startDate" value="20{{Carbon\Carbon::now()->format('y-m-d\TH:i')}}">
-                    {!! $errors->first('startDate','<p class="alert alert-danger">:message</p>') !!}
+                    <input name="start_date" type="dateTime-local" class="form-control" value="20{{Carbon\Carbon::now()->format('y-m-d\TH:i')}}" required>
+                    {!! $errors->first('start_date','<p class="alert alert-danger">:message</p>') !!}
                 </div>
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                {!! Form::label('endDate','End Date:') !!}
+                {!! Form::label('end_date','End Date:') !!}
                 <div>
-                    <input name="endDate" type="dateTime-local" class="form-control" id="endDate" value="20{{Carbon\Carbon::now()->format('y-m-d\TH:i')}}">
+                    <input name="end_date" type="dateTime-local" class="form-control" id="end_date" value="20{{Carbon\Carbon::now()->format('y-m-d\TH:i')}}" required>
                     {!! $errors->first('end_date','<p class="alert alert-danger">:message</p>') !!}
                 </div>
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                <label for="link">Event Link, if any</label>
-                <input name="link" type="text" class="form-control" id="link" placeholder="Event link" required>
+                <label for="url">Event Link, if any</label>
+                <input name="link" type="url" class="form-control" placeholder="Event url" required>
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group row">
                 <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Upload Event Image') }}</label>
                 <div class="col-md-6">
-                    <input id="image" type="file" name="image" value="{{ old('image') }}" required> @if ($errors->has('image'))
+                    <input id="image" type="file" name="image" value="{{ old('image') }}" required>
+                    @if ($errors->has('image'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('image') }}</strong>
                     </span>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Room;
 use Illuminate\Support\Facades\Input as Input;
+use App\Http\Controllers\Controller;
+
 use App\Booking;
 use Calendar;
 
@@ -80,14 +82,14 @@ class RoomsController extends Controller
 
     public function store()
     {
-        $this->validate(request(),['name'=>'required']);
+        $this->validate(request(),['name'=>'required','description'=>'required','floor_nr'=>'required','adress'=>'required','image'=>'required','bookable'=>'required']);
     
         $room = new Room();
         $room->name = request('name');
         $room->description = request('description');
         $room->floor_nr = request('floor_nr');
         $room->adress = request('adress');
-        if (request('bookable') == 'on'){
+        if (request('bookable') === 'on'){
         $room->bookable = 1;
         }else{
         $room->bookable = 0;
@@ -109,44 +111,35 @@ class RoomsController extends Controller
         return view('rooms.update',compact('room'));
     }
 
-    public function update(Room $room)
+    public function update(Room $room, Request $request)
     {   
+        // dd($request->bookable,"I am at the begining of update");
         $room->name = request('name');
         $room->description = request('description');
         $room->floor_nr = request('floor_nr');
         $room->adress = request('adress');
-        // dd(request('bookable'));
-        if (request('bookable') === "on"){
-            $room->bookable = 0;
-            // dd("the request is ".request('bookable'));
-        }else{
-            // dd("the request is".request('bookable'));
-
+        if ($request->bookable === "1"){
             $room->bookable = 1;
+            // dd($room->bookable);
+        }else{
+            $room->bookable = 0;
+            // dd($room->bookable);
         }                
-        // $room->image = request('image');
         if(Input::hasFile('image')){
             $file = Input::file('image');
             $room->image = $file->getClientOriginalName();
             $file->move('img\rooms', $file->getClientOriginalName());
         }
         $room->save();
-        // dd($room->bookable,$room);
+            dd($room->bookable,'finish');
 
-        //redirect to show_all page
         return redirect(action('RoomsController@index'));  
         
     }
 
     public function destroy(Room $room) 
     {
-        //  dd($room);
         $room->delete();
         return redirect(action('RoomsController@index'));
-        
-        // $booking = Booking::findOrFail($id);
-        // $booking->delete();
-        // return back();
     }
-    
 }

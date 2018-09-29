@@ -1,64 +1,37 @@
-
- <div class="row">
-                <div class="col-lg-2">
-                    <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image"
-                        width="140" height="140">
-                    <h2>Heading</h2>
-                    <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies
-                        vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo
-                        cursus magna.</p>
-                    <p>
-                        <a class="btn btn-secondary" href="#" role="button">View details &raquo;</a>
-                    </p>
-                </div>
-                <!-- /.col-lg-2 -->
-                <div class="col-lg-2">
-                    <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image"
-                        width="140" height="140">
-                    <h2>Heading</h2>
-                    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras
-                        mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                        condimentum nibh.</p>
-                    <p>
-                        <a class="btn btn-secondary" href="#" role="button">View details &raquo;</a>
-                    </p>
-                </div>
-                <!-- /.col-lg-2 -->
-                <div class="col-lg-2">
-                    <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image"
-                        width="140" height="140">
-                    <h2>Heading</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-                        porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-                        ut fermentum massa justo sit amet risus.</p>
-                    <p>
-                        <a class="btn btn-secondary" href="#" role="button">View details &raquo;</a>
-                    </p>
-                </div>
-                <!-- /.col-lg-2 -->
-                <div class="col-lg-2">
-                    <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image"
-                        width="140" height="140">
-                    <h2>Heading</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-                        porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-                        ut fermentum massa justo sit amet risus.</p>
-                    <p>
-                        <a class="btn btn-secondary" href="#" role="button">View details &raquo;</a>
-                    </p>
-                </div>
-                <!-- /.col-lg-2 -->
-                <div class="col-lg-2">
-                    <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image"
-                        width="140" height="140">
-                    <h2>Heading</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-                        porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-                        ut fermentum massa justo sit amet risus.</p>
-                    <p>
-                        <a class="btn btn-secondary" href="#" role="button">View details &raquo;</a>
-                    </p>
-                </div>
-                <!-- /.col-lg-2 -->
-            </div>
-            <!-- /.row -->
+<div class="card-deck card-columns mt-2">
+    <div class="card text-white col-lg-2">
+        <img class="img-thumbnail rounded-circle " src="/img/circles/about.jpg" alt="Card image" width="140" height="140" style="height:100%; width:100%; ">
+        <div class="card-img-overlay">
+            <h5 class="card-title text-center" style="text-shadow: 2px 2px black;">About us</h5>
+            
+        </div>
+    </div>
+    <div class="card text-white col-lg-2">
+        <img class="img-thumbnail rounded-circle " src="/img/circles/events.jpg" alt="Card image" width="140" height="140" style="height:100%; width:100%; ">
+        <div class="card-img-overlay">
+            <h5 class="card-title text-center" style="text-shadow: 2px 2px black;">Events</h5>
+            
+        </div>
+    </div>
+    <div class="card text-white col-lg-2">
+        <img class="img-thumbnail rounded-circle " src="/img/circles/booking.jpg" alt="Card image" width="140" height="140" style="height:100%; width:100%; ">
+        <div class="card-img-overlay">
+            <h5 class="card-title text-center" style="text-shadow: 2px 2px black;">Book a room</h5>
+            
+        </div>
+    </div>
+    <div class="card text-white col-lg-2">
+        <img class="img-thumbnail rounded-circle " src="/img/circles/partners.jpg" alt="Card image" width="140" height="140" style="height:100%; width:100%; ">
+        <div class="card-img-overlay">
+            <h5 class="card-title text-center" style="text-shadow: 2px 2px black;">Partners</h5>
+            
+        </div>
+    </div>
+    <div class="card text-white col-lg-2">
+        <img class="img-thumbnail rounded-circle " src="/img/circles/contact.jpg" alt="Card image" width="140" height="140" style="height:100%; width:100%; ">
+        <div class="card-img-overlay">
+            <h5 class="card-title text-center" style="text-shadow: 2px 2px black;">Contact us</h5>
+            
+        </div>
+    </div>
+</div>

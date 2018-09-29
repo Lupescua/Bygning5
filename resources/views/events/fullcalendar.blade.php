@@ -11,32 +11,31 @@ Calendar
 @section('content')
 
 
-@if (Auth::check())
-    <div class="mr-auto">
-      <a class="btn" href="/events/create">Add Event</a>
-    </div>
-@endif
-
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Events Calendar </div>
-
-                <div class="panel-body">
-                    {!! $calendar->calendar() !!}
+        <div class="col-md-10 col-md-offset-2">
+            <div class="panel panel-default ">
+                <div class="panel-heading">Events Calendar</div>
+                <div class="media">
+                    <div class="panel-body">
+                        {!! $calendar->calendar() !!}
+                    </div>
+                    @if (Auth::check())
+                        <div class="ml-3 align-self-start ">
+                            <a class="btn btn-primary" href="/events/create">Add Event</a>
+                        </div>
+                    @endif
                 </div>
-            </div>
-        </div>
+            </div>           
+        </div>  
     </div>
 </div>
 
-
 <div class="container">
 @foreach ($data as $event)
-
-    @include ('events.event_detail')
-
+    @if(Carbon\Carbon::yesterday() <=  Carbon\Carbon ::parse($event->end_date))
+        @include ('events.event_detail')
+    @endif
 @endforeach
 </div>
 @endsection

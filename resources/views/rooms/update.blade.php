@@ -1,50 +1,41 @@
-@extends('layouts.layout') @section('title') Add a new Room @endsection @section('content')
-<form method="post" action="/rooms/{{$room->id}}/update" enctype="multipart/form-data">
-   {{csrf_field()}}
+@extends('layouts.layout') 
+@section('title') Add a new Room @endsection 
+@section('content')
+{{Form::model($room,array('files'=>TRUE, 'route'=>array("room.update",$room->id)))}}
     <div class="form-row">
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                <label for="name">Room Title</label>
-                <input name="name" type="text" class="form-control" id="name" value="{{$room->name}}">
+                {{Form::label('Room Title',null,['for'=>"name"])}}
+                {{Form::text('name',null,['class'=>'form-control'])}}
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                <label for="description">Room Description</label>
-                <textarea name="description" type="text" class="form-control" id="description" value="{{$room->description}}">
-                    {{$room->description}}
-                </textarea>
+                {{Form::label('Room Description',null,['for'=>"description"])}}
+                {{Form::textarea('description',null,['class'=>'form-control'])}}
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                <label for="adress">Building Adress</label>
-                <input name="adress" type="text" class="form-control" id="adress" placeholder="Nicolai Bygning 5" value="{{$room->adress}}">
+                {{Form::label('Building Adress',null,['for'=>"adress"])}}
+                {{Form::text('adress',null,['class'=>'form-control','placeholder'=>"Nicolai Bygning 5" ])}}
             </div>
         </div>
         <div class="col-md-8 mb-3">
             <div class="form-group">
-                <label for="floor_nr">Floor Number</label>
-                <input name="floor_nr" type="text" class="form-control" id="floor_nr" placeholder="Floor Number" value="{{$room->floor_nr}}">
+                {{Form::label('Floor Number',null,['for'=>"floor_nr"])}}
+                {{Form::text('floor_nr',null,['class'=>'form-control','placeholder'=>"Floor Number" ])}}
             </div>
         </div>
 
         <div class="col-md-8 mb-3">
             <div class="form-group row">
                 <div class="col-md-5 order-md-1">
-                    @if(count($room->image) > 0)
-                    <img class="featurette-image img-fluid mx-auto" src="/img/rooms/{{$room->image}}" data-src="holder.js/500x500/auto" alt="Generic placeholder image"> @else
-                    <img class="featurette-image img-fluid mx-auto" src="http://designsontap.co/wp-content/uploads/2018/07/teenage-guy-bedroom-ideas-beautiful-best-cool-room-decorating-ideas-for-guys-e280a2-the-ignite-show-of-teenage-guy-bedroom-ideas.jpg"
-                        data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-                    @endif
+                    <img class="featurette-image img-fluid mx-auto" src="/img/rooms/{{$room->image}}" data-src="holder.js/500x500/auto" alt="Generic placeholder image"> 
                 </div>
-                <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Upload Room Image') }}</label>
+                {{Form::label('Upload Room Image',null,['class'=>'col-md-4 col-form-label text-md-right','for'=>"image"])}}
                 <div class="col-md-6">
-                    <input id="image" type="file" name="image" value="{{ old('image') }}"> @if ($errors->has('image'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('image') }}</strong>
-                    </span>
-                    @endif
+                    {{Form::file('image',['placeholder'=>"$room->image"])}}
                 </div>
             </div>
         </div>
@@ -53,16 +44,15 @@
                 <div class='input-group date' id='bookable_room'>
                     @if (Auth::check())    
                         @if (Auth::user()->admin === 1)
-                        <label for="bookable">Can the room be booked? Yes?</label><input {{isset($room['bookable'])&&$room['bookable']=='1' ? 'checked' : '0'}}value="1" type="checkbox" name="bookable">
-                        
-
-
-                            {{-- @if ($room->bookable === 1)
-                            <input name="bookable" type='checkbox' value="1" checked>
-                            @elseif ($room->bookable === 0)
-                            <input name="bookable" type='checkbox' value="0" >
-                            <label for="bookable">The room currently Can Not be Booked</label>
-                            @endif --}}
+                        <label for="bookable">Can the room be booked?</label>
+                            @if ($room->bookable === 1)
+                                {{-- <input name="bookable" type="hidden" value="0"> --}}
+                                <input checked="checked" name="bookable" type="checkbox" value="1">
+                            @else
+                                {{-- <input name="bookable" type="hidden" value="0"> --}}
+                                <input name="bookable" type="checkbox" value="1">
+                            <p></br>The room currently Can Not be Booked</p>
+                            @endif
                         @endif
                     @endif
                 </div>
@@ -71,9 +61,9 @@
     </div>
     <div class="form-group">
         <div class="row">
-            <button class="btn btn-primary offset-sm-7" type="submit">Update</button>
+                {{Form::submit('Update',['class'=>'btn offset-sm-7'])}}
         </div>
     </div>
     @include ('layouts.errors')
-</form>
+{{Form::close() }}
 @endsection

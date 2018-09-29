@@ -7,6 +7,7 @@ use App\User;
 use Image;
 use Auth;
 use App\Event;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
@@ -83,6 +84,12 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {   
+        return Validator::make($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',  
+            'image' => 'required', 
+        ]);
         $user =  User::where('id', $id)->first();
         if($request->hasFile('image')){
     		$image = $request->file('image');

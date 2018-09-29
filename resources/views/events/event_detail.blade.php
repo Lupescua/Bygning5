@@ -54,6 +54,6 @@
         @endif
     </div>
     <div class="col-md-5 order-md-1">     
-            <img class="featurette-image img-fluid mx-auto" src="/img/events/{{$event->image}}" data-src="holder.js/500x500/auto" alt="Generic placeholder image"> 
+            <img class="img-thumbnail" src="/img/events/{{$event->image}}"  alt="Generic placeholder image"> 
   </div>
 </div>
