@@ -113,17 +113,14 @@ class RoomsController extends Controller
 
     public function update(Room $room, Request $request)
     {   
-        // dd($request->bookable,"I am at the begining of update");
         $room->name = request('name');
         $room->description = request('description');
         $room->floor_nr = request('floor_nr');
         $room->adress = request('adress');
         if ($request->bookable === "1"){
             $room->bookable = 1;
-            // dd($room->bookable);
         }else{
             $room->bookable = 0;
-            // dd($room->bookable);
         }                
         if(Input::hasFile('image')){
             $file = Input::file('image');
@@ -131,7 +128,6 @@ class RoomsController extends Controller
             $file->move('img\rooms', $file->getClientOriginalName());
         }
         $room->save();
-            dd($room->bookable,'finish');
 
         return redirect(action('RoomsController@index'));  
         

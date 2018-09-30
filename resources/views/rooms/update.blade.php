@@ -46,10 +46,8 @@
                         @if (Auth::user()->admin === 1)
                         <label for="bookable">Can the room be booked?</label>
                             @if ($room->bookable === 1)
-                                {{-- <input name="bookable" type="hidden" value="0"> --}}
                                 <input checked="checked" name="bookable" type="checkbox" value="1">
                             @else
-                                {{-- <input name="bookable" type="hidden" value="0"> --}}
                                 <input name="bookable" type="checkbox" value="1">
                             <p></br>The room currently Can Not be Booked</p>
                             @endif
